@@ -1,4 +1,35 @@
 <!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OS 구분하기</title>
+    <script>
+        function detectMobileOS() {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            let osType = "Unknown";
+
+            if (/android/i.test(userAgent)) {
+                osType = "Android";
+            } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
+                osType = "iOS";
+            }
+
+            alert("현재 OS: " + osType);
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            detectMobileOS();
+        });
+    </script>
+</head>
+<body>
+    <h2>OS 확인하기</h2>
+    <p>페이지가 로드되면 자동으로 OS를 감지하고 팝업이 표시됩니다.</p>
+</body>
+</html>
+
+<!--<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 <html>
     <head>
@@ -115,3 +146,4 @@ window.onload=function deviceCheck() {
 
     </body>
 </html>
+-->
