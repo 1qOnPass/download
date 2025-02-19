@@ -11,11 +11,12 @@
 
             if (/android/i.test(userAgent)) {
                 osType = "Android";
+		    location.href="./download/1QONPASS.apk";
             } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
                 osType = "iOS";
             }
-
-            alert("현재 OS: " + osType);
+	location.href="https://apps.apple.com/us/app/1q-on-pass/id6474642959";
+         
         }
 
         document.addEventListener("DOMContentLoaded", function () {
@@ -146,4 +147,3 @@ window.onload=function deviceCheck() {
 
     </body>
 </html>
--->
