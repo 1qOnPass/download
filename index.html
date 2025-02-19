@@ -25,22 +25,25 @@
 			.content_area .cont_lst li:before {position: absolute; top: 0.5em; left: 0; content: ''; display: inline-block; width: 0.25em; height: 0.25em; background: #999; }
 		</style>
     <script>
-        function detectMobileOS() {
+             function redirectToApp() {
             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-            let osType = "Unknown";
+            let url = "";
 
             if (/android/i.test(userAgent)) {
-                osType = "Android";
+                url = "./download/1QONPASS.apk";  
             } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
-                osType = "iOS";
+                url = "https://apps.apple.com/us/app/1q-on-pass/id6474642959"; 
+            } else {
+                alert("이동할 수 없습니다. 지원되지 않는 OS입니다.");
+                return;
             }
-		 alert("현재 OS: " + osType);
-	location.href="https://apps.apple.com/us/app/1q-on-pass/id6474642959";
-         
+
+            alert("해당 OS에 맞는 페이지로 이동합니다.");
+            location.href = url;
         }
 
         document.addEventListener("DOMContentLoaded", function () {
-            detectMobileOS();
+            redirectToApp();
         });
     </script>
 </head>
