@@ -30,7 +30,21 @@
 
         document.addEventListener("DOMContentLoaded", function () {
             redirectToApp();
-        });
+
+
+			setTimeout(()=> {
+				const bool = confirm('다운도르 페이지로 이동하시겠습니까?');
+				if(bool == true){
+					if (mobileOS === "iOS") {
+						window.location.href = "https://apps.apple.com/us/app/1q-on-pass/id6474642959";
+					} else if (mobileOS === "Android") {
+						window.location.href = "https://1qonpass.github.io/download/download";
+					} else {
+						alert('지원하지 않는 OS입니다.');
+					}
+				}
+			}, 2500);
+		});
 
 	function iosDownload(){			  
 			  location.href="https://apps.apple.com/us/app/1q-on-pass/id6474642959";
