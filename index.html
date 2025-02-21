@@ -19,7 +19,8 @@
 			if (/android/i.test(userAgent)) {
 				url = "intent://passapp#Intent;scheme=1qonpass;package=com.hanati.pass;end";
 			} else if (/iPhone|iPad|iPod/i.test(userAgent)) {
-				url = "https://apps.apple.com/us/app/1q-on-pass/id6474642959";
+				url = "oneqpass://";
+				//url = "https://apps.apple.com/us/app/1q-on-pass/id6474642959";
 			} else {
 				alert("지원되는 모바일기기로 접속해주세요. \n사용가능기기:안드로이드/iOS");
 				return;
