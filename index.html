@@ -11,7 +11,7 @@
 <meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <link type="text/css" rel="stylesheet" href="css/base.css">
-
+<!--
  <script>
             function redirectToApp() {
             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
@@ -41,6 +41,55 @@
 			  alert("다운로드가 시작 되었습니다.");		
 			}	
     </script>
+-->
+	<script>
+		function openAppOrRedirect() {
+			const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+			let appUrl = "";
+			let storeUrl = "";
+
+			if (/android/i.test(userAgent)) {
+				appUrl = "intent://1QONPASS/#Intent;scheme=1qonpass;package=com.hana.onpass;end;";
+				storeUrl = "./download/1QONPASS.apk";
+			} else if (/iPhone|iPad|iPod/i.test(userAgent)) {
+				appUrl = "1qonpass://";
+				storeUrl = "https://apps.apple.com/us/app/1q-on-pass/id6474642959";
+			} else {
+				alert("지원되는 모바일 기기에서 접속해주세요. (Android / iOS)");
+				return;
+			}
+
+			let startTime = Date.now();
+			let hiddenIframe = document.createElement("iframe");
+
+			hiddenIframe.style.display = "none";
+			document.body.appendChild(hiddenIframe);
+			hiddenIframe.src = appUrl;
+
+			setTimeout(() => {
+				document.body.removeChild(hiddenIframe);
+				let endTime = Date.now();
+
+				if (endTime - startTime < 2000) {
+					// 앱이 설치되지 않았을 가능성이 높음 → 스토어 이동
+					window.location.href = storeUrl;
+				}
+			}, 1500);
+		}
+
+		document.addEventListener("DOMContentLoaded", function () {
+			openAppOrRedirect();
+		});
+
+		function iosDownload() {
+			location.href = "https://apps.apple.com/us/app/1q-on-pass/id6474642959";
+		}
+
+		function aosDownload() {
+			location.href = "./download/1QONPASS.apk";
+			alert("다운로드가 시작되었습니다.");
+		}
+	</script>
 
 </head>
 <body>
