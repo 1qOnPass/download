@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)https://sotp.thek-portal.com/ -->
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./image/favicon.ico" />
+    <title>1Q ON PASS 로그인</title>
+    <link href="./css/bootstrap.min.css" rel="stylesheet" />
+    <link href="./css/animate.css" rel="stylesheet" />
+    <link href="./css/sweetalert.css" rel="stylesheet" type="text/css" />
+    <link href="./css/style.css" rel="stylesheet" />
+    <link href="./css/blue.css" id="theme" rel="stylesheet" />
+</head>
+<script th:if="${@environment.getActiveProfiles()[0] == 'local'}">
+	let env = '로컬';
+</script>
+<script th:if="${@environment.getActiveProfiles()[0] == 'dev'}">
+	let env = '개발';
+</script>
+<script th:if="${@environment.getActiveProfiles()[0] == 'prod'}">
+	let env = '운영';
+</script>
+<body oncontextmenu="return false" ondragstart="return false" onselectstart="return false">
+<div id="loading-wheel" class="preloader" style="display: none">
+    <h3>Login Processing...</h3>
+    <div class="cssload-speeding-wheel"></div>
+</div>
+<!-- 2017-11-20 ajax 로딩바 -->
+<div class="ajaxloader" style="display: none">
+    <div class="ajaxload-speeding-wheel"></div>
+</div>
+<section id="wrapper" class="login-register">
+    <div class="login-box">
+        <div class="white-box">
+            <form class="form-material" name="loginform" id="loginform">
+                <!-- RSA -->
+                <input
+                        type="hidden"
+                        id="rsaPublicKeyModulus"
+                        name="rsaPublicKeyModulus"
+                        value="b8cfb1c23b0abb3ace83a907d3a0f628c921d55696d5c0a2eabf2a9c1ccfe5bcb25ed4887c8c8a3909b2e2115fcb250f83c4113603b2a2b705f352637afa9d60673056a410c307a005658a3e1f26667f2eafac8be55858e1df35af913020a3439b66b628c35f5d4bf6f10cac49aa0564d10f0eb2fdb17e305055c3863522e6af" />
+                <input
+                        type="hidden"
+                        id="rsaPublicKeyExponent"
+                        name="rsaPublicKeyExponent"
+                        value="10001" />
+
+                <div class="form-group" style="background: #ffffff">
+                    <div class="top-left-part" style="background: #ffffff">
+                        <img src="./image/hanati_ci.png" class="logo-login" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <select class="form-control" name="sysId" id="sysId">
+                            <option value="">--업무선택--</option>
+                            <div th:if="${@environment.getActiveProfiles()[0] == 'local'}">
+                                <option value="TI_SMPL_LOC">티아이_샘플_시스템_로컬</option>
+                            </div>
+
+                            <div th:if="${@environment.getActiveProfiles()[0] == 'dev'}">
+                                <option value="TI_SMPL_TEST">티아이_샘플_시스템_개발</option>
+                            </div>
+
+                            <div th:if="${@environment.getActiveProfiles()[0] == 'prod'}">
+                                <option value="TI_SMPL">티아이_샘플_시스템_운영</option>
+                            </div>
+                        </select>
+                    </div>
+                </div>
+                <!--
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <input class="form-control" name="userId" id="userId" type="text" placeholder="사용자ID">
+                        </div>
+                    </div>
+                     -->
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input
+                                class="form-control"
+                                name="passCode"
+                                id="passCode"
+                                type="text"
+                                autocomplete="off"
+                                placeholder="PASS코드" />
+                    </div>
+                </div>
+                <div class="form-group text-center m-t-20">
+                    <div class="col-xs-12">
+                        <button
+                                class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light"
+                                type="button"
+                                id="login-btn">
+                            로그인
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group m-b-0">
+                    <div class="col-sm-12 text-center">
+                        <p>
+                            QR로그인을 하시겠습니까?
+                            <a th:href="@{/qrLogin}" id="qr-login-btn" class="text-primary m-l-5"
+                            ><b>QR로그인</b></a
+                            >
+                        </p>
+                        <p>
+                            사용자 등록이 필요합니까?
+                            <a th:href="@{/register}" id="user-registry-qrcode-btn" class="text-primary m-l-5"
+                            ><b>사용자 등록</b></a
+                            >
+                        </p>
+                        <p>
+                            단말기를 미소지하셨습니까?
+                            <a href="javascript:void(0);" id="user-temp-otid-btn" class="text-primary m-l-5"
+                            ><b>임시PASS발급</b></a
+                            >
+                        </p>
+						<p>
+                           푸쉬로그인이하고싶읍니까
+                           <a th:href="@{/pushLogin}" id="push-login-btn" class="text-primary m-l-5"
+                           ><b>PUSH LOGIN</b></a
+                           >
+                       </p>
+                        <p>
+                            <a th:href="@{/agreement}" id="info-rule-btn" class="text-primary m-l-5"
+                            ><b>개인정보처리 방침</b></a
+                            >
+                        </p>
+						
+                    </div>
+                </div>
+                <div class="form-group text-center m-t-20" id="app-call-btn-div">
+                    <div class="col-xs-12">
+                        <button
+                                class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light"
+                                type="button"
+                                id="app-call-btn">
+                             	앱 호출
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<script src="./javascript/jquery.min.js"></script>
+<script src="./javascript/bootstrap.min.js"></script>
+<script src="./javascript/wp-sidebar.js"></script>
+<script src="./javascript/jquery.slimscroll.js"></script>
+<script src="./javascript/waves.js"></script>
+<script src="./javascript/sweetalert.min.js"></script>
+
+<script src="./javascript/custom.min.js"></script>
+<script src="./javascript/jQuery.style.switcher.js"></script>
+<script type="text/javascript" src="./javascript/sweetalert-dev.js"></script>
+<script type="text/javascript" src="./javascript/util.js"></script>
+<script type="text/javascript" src="./javascript/jsbn.js"></script>
+<script type="text/javascript" src="./javascript/base64.js"></script>
+<script type="text/javascript" src="./javascript/rsa.js"></script>
+<script type="text/javascript" src="./javascript/prng4.js"></script>
+<script type="text/javascript" src="./javascript/rng.js"></script>
+
+<script type="text/javascript">
+    /* select 박스 설정 */
+    $(document).ready(function () {
+        $("#login-btn").on("click", login);
+        $("#certcode").on("keydown", function (e) {
+            var keycode = e.keyCode;
+
+            if (keycode == 13) {
+                login();
+            }
+        });
+        $("#qr-login-btn").on("click", qrLogin);
+        $("#user-registry-qrcode-btn").on("click", userRegistryQrcode);
+        $("#user-temp-otid-btn").on("click", userTempOtid);
+		$("#push-login-btn").on("click", pushLogin);
+		
+
+        $("input").on("keydown", function (e) {
+            var keyCode = e.keyCode;
+
+            if (keyCode === 13) {
+                login();
+                return false;
+            }
+        });
+        
+        //환경별 타이틀 수정
+        document.title = document.title + '(' + env + ')';
+        
+        //모바일 접근일 경우 버튼 활성화
+        if (isMobile()) {
+        	console.log("Mogile Ascess");
+        	$("#app-call-btn-div").show();
+        	$("#app-call-btn").on("click", appCall);
+        } else {
+        	console.log("Web Ascess");
+        	$("#app-call-btn-div").hide();
+        }
+    });
+    
+    function isMobile() {
+    	return /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
+    
+    function getMobileOS() {
+    	const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    	
+    	//iOS인지 확인
+    	if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+    		return "iOS";
+    	}
+    	//AOS인지 확인
+    	else if (/Android/.test(userAgent)) {
+    		return "Android";
+    	}
+    	//그외
+    	else {
+    		return "Unkown";
+    	}
+    }
+    
+    //앱호출 함수 선언
+	function appCall() {
+    	const mobileOS = getMobileOS();
+    	if (mobileOS === "iOS") {
+    		console.log("iOS Ascess");
+    		window.location.href = "oneqpass://";
+    	} else if (mobileOS === "Android") {
+    		console.log("AOS Ascess");
+    		window.location.href = "intent://passapp#Intent;scheme=1qonpass;package=com.hanati.pass;end";
+    	} else {
+    		console.log("else OS");
+    	}
+		setTimeout(()=> {
+			const bool = confirm('다운도르 페이지로 이동하시겠습니까?');
+			if(bool == true){
+				if (mobileOS === "iOS") {
+					window.location.href = "https://apps.apple.com/us/app/1q-on-pass/id6474642959";
+				} else if (mobileOS === "Android") {
+					window.location.href = "https://1qonpass.github.io/download/download";
+				} else {
+					alert('지원하지 않는 OS입니다.');
+				}
+			}
+		}, 2500);
+    }    
+
+    function userRegistryQrcode() {
+        location.href = "";
+
+        var f = document.getElementById("loginform");
+
+        // window.open('','userRegistryQrcode');
+
+        f.action = "/register";
+        f.target = "userRegistryQrcode";
+        f.submit();
+    }
+	
+	function pushLogin() {
+	        location.href = "";
+
+	        var f = document.getElementById("loginform");
+	        f.submit();
+	    }
+	
+	
+
+    function userTempOtid() {
+        var f = document.getElementById("loginform");
+
+        swalHelper.alert.info("기능 구현 예정");
+
+        //         	window.open('','userTempOtid');
+
+        //     		f.method = "POST";
+        //     		f.action = "user-temp-otid.jsp";
+        //     		f.target = 'userTempOtid';
+        //     		f.submit();
+    }
+
+    function qrLogin() {
+        // var f = document.getElementById("loginform");
+        //
+        // window.open('','qrLogin');
+        //
+        // f.action = "sseQrLogin.html";
+        // f.target = 'qrLogin';
+        // f.submit();
+    }
+
+    /* 로그인 인증 */
+    function login() {
+        if ($("#sysId").val().trim() == "" || $("#sysId").val().trim().length < 1) {
+            swalHelper.alert.info("등록업무를 선택 해 주세요.");
+            return true;
+        }
+
+        if ($("#passCode").val().trim() == "" || $("#passCode").val().trim().length < 1) {
+            swalHelper.alert.info("PASS코드를 입력 해 주세요.");
+            $("#passCode").val("");
+            $("#passCode").focus();
+            return true;
+        }
+
+        var data = toObject("loginform");
+
+        doAjaxPost(data, "/auth/login", false, function (json) {
+            // 세션 설정
+            var ttl = 60 * 10 * 1000; // 10분
+            var userData = {
+                "key" : "userId",
+                "value": json.userId,
+                "expire": Date.now() + ttl
+            };
+            sessionStorage.setItem("userData", JSON.stringify(userData));
+
+            // form submit
+            var f = document.getElementById("loginform");
+            f.method = "POST";
+            f.action = "loginSuccess";
+            f.submit();
+        });
+
+        $("#passCode").val("");
+    }
+
+    /* 자동로그인 */
+    function auto_login(data) {
+        // 로딩중 화면으로 전환
+        $("#wrapper").hide();
+        $("#loading-wheel").show();
+
+        var flag = 1; // 1이면 일반적인 post 방식, 2이면 sse 채널 방식
+        data = JSON.parse(data);
+
+        if (flag === 1) {
+            var url = "/auth/autoAuth";
+
+            doAjaxPost(data, url, false, function (json) {
+                // 세션 설정
+                var ttl = 60 * 10 * 1000; // 10분
+                var userData = {
+                    "key" : "userId",
+                    "value": json.userId,
+                    "expire": Date.now() + ttl
+                };
+                sessionStorage.setItem("userData", JSON.stringify(userData));
+
+                setTimeout(() => location.href = "/loginSuccess", 2000);
+            });
+        } else {
+            data.passCode = encodeURIComponent(data.passCode); //'+' 문자 변환
+            auto_sse_start(data);
+        }
+    }
+
+    function auto_sse_start(json) {
+        var url =
+            "/auth/autoAuth?passCode=" +
+            json.passCode +
+            "&sysId=" +
+            json.sysId +
+            "&sessId=" +
+            json.sessId;
+
+        console.log("create eventSource");
+
+        if (typeof EventSource !== "undefined") {
+            // Use native EventSource if available
+            source = new EventSource(url, { heartbeatTimeout: 120000 });
+        } else {
+            // Use EventSource polyfill for Internet Explorer
+            source = new EventSourcePolyfill(url, { heartbeatTimeout: 120000 });
+        }
+
+        source.onmessage = function (event) {
+            console.log("on message : ", event.data);
+
+            var json = JSON.parse(event.data);
+            var userId = json.userId;
+            sessionStorage.clear();
+            var userData = {
+                "key" : "userId",
+                "value": userId,
+                "expire": Date.now() + ttl
+            };
+            sessionStorage.setItem("userData", JSON.stringify(userData));
+            // sessionStorage.setItem("userId", userId);
+
+            auto_sse_stop();
+
+            location.href = "/loginSuccess";
+        };
+        source.onerror = function (error) {
+            console.log("on error : ", error);
+            auto_sse_stop();
+        };
+    }
+
+    function auto_sse_stop() {
+        if (source != null) {
+            source.close();
+            console.log("close EventSource");
+            source = null;
+        }
+    }
+	
+	
+</script>
+</body>
+</html>
