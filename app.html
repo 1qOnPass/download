@@ -22,7 +22,7 @@
             } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
                 url = "https://apps.apple.com/us/app/1q-on-pass/id6474642959"; 
             } else {
-                alert("지원되는 모바일기기로 접속해주세요. \n사용가능기기:안드로이드/iOS");
+                //alert("지원되는 모바일기기로 접속해주세요. \n사용가능기기:안드로이드/iOS");
                 return;
             }
             location.href = url;
@@ -31,13 +31,12 @@
         document.addEventListener("DOMContentLoaded", function () {
             redirectToApp();
 
-
 			setTimeout(()=> {
 				const bool = confirm('다운도르 페이지로 이동하시겠습니까?');
 				if(bool == true){
-					if (mobileOS === "iOS") {
+					if (/iPhone|iPad|iPod/i.test(userAgent)) {
 						window.location.href = "https://apps.apple.com/us/app/1q-on-pass/id6474642959";
-					} else if (mobileOS === "Android") {
+					} else if (/android/i.test(userAgent)) {
 						window.location.href = "https://1qonpass.github.io/download/download";
 					} else {
 						alert('지원하지 않는 OS입니다.');
