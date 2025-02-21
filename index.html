@@ -26,6 +26,7 @@
 			 return;
 		 }
 
+
 		 let hiddenIframe = document.createElement("iframe");
 		 hiddenIframe.style.display = "none";
 		 document.body.appendChild(hiddenIframe);
@@ -33,19 +34,17 @@
 		 let startTime = Date.now();
 		 let pageHidden = false;
 
-		 // 문서가 백그라운드로 이동하는지 감지 (앱이 실행되었을 가능성 높음)
-		 function handleVisibilityChange() {
-			 if (document.hidden) {
-				 pageHidden = true;
-			 }
+		 function handlePageHide() {
+			 pageHidden = true;
 		 }
-		 document.addEventListener("visibilitychange", handleVisibilityChange);
+
+		 window.addEventListener("pagehide", handlePageHide);
 
 		 hiddenIframe.src = appUrl;
 
 		 setTimeout(() => {
 			 document.body.removeChild(hiddenIframe);
-			 document.removeEventListener("visibilitychange", handleVisibilityChange);
+			 window.removeEventListener("pagehide", handlePageHide);
 
 			 let elapsedTime = Date.now() - startTime;
 
