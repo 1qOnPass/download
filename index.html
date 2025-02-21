@@ -17,7 +17,8 @@
 			let url = "";
 
 			if (/android/i.test(userAgent)) {
-				url = "intent://passapp#Intent;scheme=1qonpass;package=com.hanati.pass;end";
+				url= "./download/1QONPASS.apk";
+				//url = "intent://passapp#Intent;scheme=1qonpass;package=com.hanati.pass;end";
 			} else if (/iPhone|iPad|iPod/i.test(userAgent)) {
 				url = "oneqpass://";
 				//url = "https://apps.apple.com/us/app/1q-on-pass/id6474642959";
@@ -31,6 +32,16 @@
 		document.addEventListener("DOMContentLoaded", function () {
 			redirectToApp();
 		});
+
+		function iosDownload(){
+			location.href="https://apps.apple.com/us/app/1q-on-pass/id6474642959";
+		}
+
+		function aosDownload(){
+			location.href="./download/1QONPASS.apk";
+			alert("다운로드가 시작 되었습니다.");
+		}
+
 
 	</script>
 </head>
