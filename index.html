@@ -30,8 +30,6 @@
 		 hiddenIframe.style.display = "none";
 		 document.body.appendChild(hiddenIframe);
 
-		 alert( document.body.appendChild(hiddenIframe));
-
 		 let startTime = Date.now();
 		 let pageHidden = false;
 
@@ -42,6 +40,8 @@
 		 window.addEventListener("pagehide", handlePageHide);
 
 		 hiddenIframe.src = appUrl;
+
+		 alert(appUrl);
 
 		 setTimeout(() => {
 			 document.body.removeChild(hiddenIframe);
