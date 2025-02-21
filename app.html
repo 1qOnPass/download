@@ -29,28 +29,38 @@
 			 return;
 		 }
 
-		 let startTime = Date.now();
 		 let hiddenIframe = document.createElement("iframe");
-
 		 hiddenIframe.style.display = "none";
 		 document.body.appendChild(hiddenIframe);
+
+		 let startTime = Date.now();
+		 let pageHidden = false;
+
+		 // 문서가 백그라운드로 이동하는지 감지 (앱이 실행되었을 가능성 높음)
+		 function handleVisibilityChange() {
+			 if (document.hidden) {
+				 pageHidden = true;
+			 }
+		 }
+		 document.addEventListener("visibilitychange", handleVisibilityChange);
+
 		 hiddenIframe.src = appUrl;
 
 		 setTimeout(() => {
 			 document.body.removeChild(hiddenIframe);
-			 let endTime = Date.now();
+			 document.removeEventListener("visibilitychange", handleVisibilityChange);
 
-			 if (endTime - startTime < 2000) {
-				 // 앱이 설치되지 않았을 가능성이 높음 → 스토어 이동
+			 let elapsedTime = Date.now() - startTime;
+
+			 if (!pageHidden && elapsedTime < 2000) {
+				 // 앱이 실행되지 않았을 가능성이 높으므로 앱 다운로드 페이지로 이동
 				 window.location.href = storeUrl;
 			 }
 		 }, 1500);
 	 }
-
 	 document.addEventListener("DOMContentLoaded", function () {
 		 openAppOrRedirect();
 	 });
-
 
 	 function iosDownload(){
 			  location.href="https://apps.apple.com/us/app/1q-on-pass/id6474642959";
