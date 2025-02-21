@@ -26,32 +26,15 @@
 			 return;
 		 }
 
-		 let hiddenIframe = document.createElement("iframe");
-		 hiddenIframe.style.display = "none";
-		 document.body.appendChild(hiddenIframe);
+		 // 앱 실행 시도
+		 window.location.href = appUrl;
 
-		 let startTime = Date.now();
-		 let pageHidden = false;
-
-		 function handlePageHide() {
-			 pageHidden = true;
-		 }
-
-		 window.addEventListener("pagehide", handlePageHide);
-		 hiddenIframe.src = appUrl;
-		 alert("dr");
+		 // 앱이 실행되지 않았을 경우 대비하여 다운로드 페이지로 이동
 		 setTimeout(() => {
-			 document.body.removeChild(hiddenIframe);
-			 window.removeEventListener("pagehide", handlePageHide);
-
-			 let elapsedTime = Date.now() - startTime;
-
-			 if (!pageHidden && elapsedTime < 2500) {
-				 // 앱이 실행되지 않았을 가능성이 높으므로 앱 다운로드 페이지로 이동
-				 window.location.href = storeUrl;
-			 }
+			 window.location.href = storeUrl;
 		 }, 2500);
 	 }
+
 	 document.addEventListener("DOMContentLoaded", function () {
 		 openAppOrRedirect();
 	 });
