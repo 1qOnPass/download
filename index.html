@@ -26,10 +26,11 @@
 			 return;
 		 }
 
-
 		 let hiddenIframe = document.createElement("iframe");
 		 hiddenIframe.style.display = "none";
 		 document.body.appendChild(hiddenIframe);
+
+		 alert( document.body.appendChild(hiddenIframe));
 
 		 let startTime = Date.now();
 		 let pageHidden = false;
