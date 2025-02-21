@@ -38,11 +38,8 @@
 		 }
 
 		 window.addEventListener("pagehide", handlePageHide);
-
 		 hiddenIframe.src = appUrl;
-
-		 alert(appUrl);
-
+		 alert("dr");
 		 setTimeout(() => {
 			 document.body.removeChild(hiddenIframe);
 			 window.removeEventListener("pagehide", handlePageHide);
