@@ -79,10 +79,10 @@
 
 			// 앱이 실행되지 않았다면 다운로드 페이지로 이동
 			setTimeout(() => {
-				if (Date.now() - now < 4000) {
+				if (Date.now() - now < 3500) {
 					window.location.href = storeUrl;
 				}
-			}, 1500);
+			}, 3500);
 
 			// iOS에서 visibilitychange 이벤트 사용 (앱이 실행되면 페이지 숨김 처리됨)
 			document.addEventListener("visibilitychange", function () {
@@ -95,7 +95,7 @@
 				if (!isAppOpened) {
 					window.location.href = storeUrl;
 				}
-			}, 2000);
+			}, 3500);
 		}
 
 		document.addEventListener("DOMContentLoaded", function () {
