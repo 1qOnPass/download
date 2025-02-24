@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <link type="text/css" rel="stylesheet" href="css/base.css">
 
- <script>
+ <!--script>
 	 function openAppOrRedirect() {
 		 const userAgent = navigator.userAgent;
 		 let appUrl = "";
@@ -32,7 +32,7 @@
 		 // 앱이 실행되지 않았을 경우 대비하여 다운로드 페이지로 이동
 		 setTimeout(() => {
 			 window.location.href = storeUrl;
-		 }, 2500);
+		 }, 2100);
 	 }
 
 	 document.addEventListener("DOMContentLoaded", function () {
@@ -47,8 +47,60 @@
 			  window.location.href="download/1QONPASS.apk";
 			  alert("다운로드가 시작 되었습니다.");		
 			}	
-    </script>
+    </script-->
 
+	<script>
+		function openAppOrRedirect() {
+			const userAgent = navigator.userAgent;
+			let appUrl = "";
+			let storeUrl = "";
+			let isIOS = /iPhone|iPad|iPod/i.test(userAgent);
+			let isAndroid = /android/i.test(userAgent);
+			let isAppOpened = false;
+
+			if (isAndroid) {
+				appUrl = "intent://passapp/#Intent;scheme=1qonpass;package=com.hanati.pass;end;";
+				storeUrl = "market://details?id=com.hanati.pass"; // 구글 플레이 스토어 이동
+			} else if (isIOS) {
+				appUrl = "oneqpass://";
+				storeUrl = "https://apps.apple.com/us/app/1q-on-pass/id6474642959";
+			} else {
+				alert("지원되는 모바일 기기에서 접속해주세요. (Android / iOS)");
+				return;
+			}
+
+			// 앱 실행 시도
+			const now = Date.now();
+			const iframe = document.createElement("iframe");
+			iframe.style.display = "none";
+			iframe.src = appUrl;
+			document.body.appendChild(iframe);
+
+			// 앱이 실행되지 않았다면 다운로드 페이지로 이동
+			setTimeout(() => {
+				if (Date.now() - now < 2000) {
+					window.location.href = storeUrl;
+				}
+			}, 1500);
+
+			// iOS에서 visibilitychange 이벤트 사용 (앱이 실행되면 페이지 숨김 처리됨)
+			document.addEventListener("visibilitychange", function () {
+				if (document.hidden) {
+					isAppOpened = true;
+				}
+			});
+
+			setTimeout(() => {
+				if (!isAppOpened) {
+					window.location.href = storeUrl;
+				}
+			}, 2000);
+		}
+
+		document.addEventListener("DOMContentLoaded", function () {
+			openAppOrRedirect();
+		});
+	</script>
 </head>
 <body>
 <!-- wrap -->
