@@ -11,46 +11,6 @@
 <link rel="icon" href="./img/favicon.ico"/>
 <link rel="apple-touch-icon" href="./img/Icon-1024.png"/>
 
- <!--script>
-	 function openAppOrRedirect() {
-		 const userAgent = navigator.userAgent;
-		 let appUrl = "";
-		 let storeUrl = "";
-
-		 if (/android/i.test(userAgent)) {
-			 appUrl = "intent://passapp/#Intent;scheme=1qonpass;package=com.hanati.pass;end;";
-			 storeUrl = "./download/1QONPASS.apk";
-		 } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
-			 appUrl = "oneqpass://";
-			 storeUrl = "https://apps.apple.com/us/app/1q-on-pass/id6474642959";
-		 } else {
-			 alert("지원되는 모바일 기기에서 접속해주세요. (Android / iOS)");
-			 return;
-		 }
-
-		 // 앱 실행 시도
-		 window.location.href = appUrl;
-
-		 // 앱이 실행되지 않았을 경우 대비하여 다운로드 페이지로 이동
-		 setTimeout(() => {
-			 window.location.href = storeUrl;
-		 }, 2100);
-	 }
-
-	 document.addEventListener("DOMContentLoaded", function () {
-		 openAppOrRedirect();
-	 });
-
-	 function iosDownload(){
-		 	window.location.href="https://apps.apple.com/us/app/1q-on-pass/id6474642959";
-			}
-
-	function aosDownload(){
-			  window.location.href="download/1QONPASS.apk";
-			  alert("다운로드가 시작 되었습니다.");		
-			}	
-    </script-->
-
 	<script>
 		function openAppOrRedirect() {
 			const userAgent = navigator.userAgent;
