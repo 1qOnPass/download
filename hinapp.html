@@ -54,7 +54,8 @@
 
 				setTimeout(() => {
 					if (!isAppOpened) {
-						window.location.href = storeUrl;
+						alert("현재 테스트 중이므로 TestFight 통해 진행해주세요.");
+						//window.location.href = storeUrl;
 					}
 				}, 3000);
 			}
@@ -64,11 +65,13 @@
 			});
 
 			function iosDownload(){
-				location.href="https://apps.apple.com/us/app/1q-on-pass/id6474642959";
+				alert("현재 테스트 중이므로 TestFight 통해 진행해주세요.");
+				//location.href="https://apps.apple.com/us/app/1q-on-pass/id6474642959";
 			}
 
 			function aosDownload(){
-				location.href="https://play.google.com/store/apps/details?id=com.hanati.pass";
+				location.href="./download/1QONPASS-HIN-TEST-F.apk";	//다운로드는 이걸로 진행해야함
+				//location.href="https://play.google.com/store/apps/details?id=com.hanati.pass";
 			}
 
 			document.addEventListener("keydown", function(event) {
