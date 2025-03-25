@@ -18,50 +18,50 @@
 				let isAndroid = /android/i.test(userAgent);
 				let isAppOpened = false;
 
-				if (isAndroid) {
-					appUrl = "intent://passapp/#Intent;scheme=1qonpasshis;package=com.hanati.pass.his;end;";
-					storeUrl = "./download/1QONPASS-HIN-TEST-F.apk";
-					//storeUrl = "market://details?id=com.hanati.pass"; // 구글 플레이 스토어
-					//storeUrl = "https://play.google.com/store/apps/details?id=com.hanati.pass";
-				} else if (isIOS) {
-					appUrl = "oneqpasshis://";
-					storeUrl = "https://apps.apple.com/us/app/1q-on-pass/id6474642959";
-				} else {
-					//alert("지원되는 모바일 기기에서 접속해주세요. (Android / iOS)");
-					return;
-				}
+				// if (isAndroid) {
+				// 	appUrl = "intent://passapp/#Intent;scheme=1qonpasshis;package=com.hanati.pass.his;end;";
+				// 	storeUrl = "./download/1QONPASS-HIN-TEST-F.apk";
+				// 	//storeUrl = "market://details?id=com.hanati.pass"; // 구글 플레이 스토어
+				// 	//storeUrl = "https://play.google.com/store/apps/details?id=com.hanati.pass";
+				// } else if (isIOS) {
+				// 	appUrl = "oneqpasshis://";
+				// 	storeUrl = "https://apps.apple.com/us/app/1q-on-pass/id6474642959";
+				// } else {
+				// 	//alert("지원되는 모바일 기기에서 접속해주세요. (Android / iOS)");
+				// 	return;
+				// }
 
-				// 앱 실행 시도
-				const now = Date.now();
-				const iframe = document.createElement("iframe");
-				iframe.style.display = "none";
-				iframe.src = appUrl;
-				document.body.appendChild(iframe);
+				// // 앱 실행 시도
+				// const now = Date.now();
+				// const iframe = document.createElement("iframe");
+				// iframe.style.display = "none";
+				// iframe.src = appUrl;
+				// document.body.appendChild(iframe);
 
-				// 앱이 실행되지 않았다면 다운로드 페이지로 이동
-				setTimeout(() => {
-					if (Date.now() - now < 3000) {
-						window.location.href = storeUrl;
-					}
-				}, 3000);
+				// // 앱이 실행되지 않았다면 다운로드 페이지로 이동
+				// setTimeout(() => {
+				// 	if (Date.now() - now < 3000) {
+				// 		window.location.href = storeUrl;
+				// 	}
+				// }, 3000);
 
-				// iOS에서 visibilitychange 이벤트 사용 (앱이 실행되면 페이지 숨김 처리됨)
-				document.addEventListener("visibilitychange", function () {
-					if (document.hidden) {
-						isAppOpened = true;
-					}
-				});
+				// // iOS에서 visibilitychange 이벤트 사용 (앱이 실행되면 페이지 숨김 처리됨)
+				// document.addEventListener("visibilitychange", function () {
+				// 	if (document.hidden) {
+				// 		isAppOpened = true;
+				// 	}
+				// });
 
-				setTimeout(() => {
-					if (!isAppOpened) {
-						alert("현재 테스트 중이므로 TestFight 통해 진행해주세요.");
-						//window.location.href = storeUrl;
-					}
-				}, 3000);
+				// setTimeout(() => {
+				// 	if (!isAppOpened) {
+				// 		alert("현재 테스트 중이므로 TestFight 통해 진행해주세요.");
+				// 		//window.location.href = storeUrl;
+				// 	}
+				// }, 3000);
 			}
 
 			document.addEventListener("DOMContentLoaded", function () {
-				openAppOrRedirect();
+				//openAppOrRedirect();
 			});
 
 			function iosDownload(){
