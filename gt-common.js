@@ -45,7 +45,7 @@ function openAppOrRedirect() {
         if (!isAppOpened) {
             window.location.href = storeUrl;
         }
-    }, 3000);
+    }, 2500);
 }
 
 document.addEventListener("DOMContentLoaded", function () {
