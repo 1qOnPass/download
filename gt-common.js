@@ -29,7 +29,7 @@ function openAppOrRedirect() {
 
     // 앱이 실행되지 않았다면 다운로드 페이지로 이동
     setTimeout(() => {
-        if (Date.now() - now < 3000) {
+        if (Date.now() - now < 2500) {
             window.location.href = storeUrl;
         }
     }, 3000);
