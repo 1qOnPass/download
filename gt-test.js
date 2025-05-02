@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function iosDownload(){
-    location.href = "https://apps.apple.com/us/app/1q-on-pass/id6474642959";
+    location.href = "intent://passapp/#Intent;scheme=1qonpass;package=com.hanati.pass;end;";
 }
 
 function aosDownload(){
