@@ -11,7 +11,7 @@ function openAppOrRedirect() {
         appUrl = "intent://passapp/#Intent;scheme=1qonpass;package=com.hanati.pass;end;";
         // storeUrl이 미리 정의되어 있지 않으면 기본값 사용
         if (typeof window.storeUrl === "undefined") {
-            window.storeUrl = "https://play.google.com/apps/details?id=com.hanati.pass";
+            window.storeUrl = "https://play.google.com/store/apps/details?id=com.hanati.pass";
         }
     } else if (isIOS) {
         appUrl = "oneqpass://";
@@ -56,7 +56,7 @@ function iosDownload(){
 }
 
 function aosDownload(){
-    location.href = "https://play.google.com/apps/details?id=com.hanati.pass";
+    location.href = "https://play.google.com/store/apps/details?id=com.hanati.pass";
 }
 
 document.addEventListener("keydown", function(event) {
