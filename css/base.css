@@ -112,7 +112,7 @@ strong {font-weight:bold;}
 .box_wrap .menual button {display:inline-block; color:#009178; font-size:24px; font-weight:bold; background-color:transparent;}
 .box_wrap .menual button span {padding-left:42px; text-decoration:underline; background:url('../img/ico_download.png') left center no-repeat; font-family:'Hana';}
 .bottom {position:absolute; left:0; bottom:0; z-index:1; width:100%; padding:22px 0; background:#009178;}
-.bottom p {color:#ffffff; text-align:center; font-weight:bold; font-size:28px; line-height:1.4; font-family:'Hana';}
+.bottom p {color:#ffffff; text-align:center; font-weight:bold; font-size:25px; line-height:1.4; font-family:'Hana';}
 
 @media all and (max-width:767px){
 	#wrap {padding-bottom:54px;}
