@@ -1,6 +1,6 @@
 @charset "utf-8"; 
 /*------------------------------------------------------------------------------------------------------------------------------------------
-	File : style.css
+	File : base.css
 	Company : HanaTI
  	CSS 적용순서 : 아이디 > 태그와 클래스 > 클래스 > 태그
 	CSS 선택자 선언순서 : Type Selector, Layout Selector, Class Selector, Etc
@@ -34,7 +34,7 @@
 
 *, *:before, *:after {
 	margin:0px;
-	padding:0px;
+	padding:3px;
 	box-sizing:inherit;
 	-webkit-tap-highlight-color:rgba(0,0,0,0);
   	-webkit-box-sizing:inherit;
