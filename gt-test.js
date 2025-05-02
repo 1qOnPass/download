@@ -56,7 +56,7 @@ function iosDownload(){
 }
 
 function aosDownload(){
-    location.href = "./download/1QONPASS.apk";
+    location.href = "https://play.google.com/store/search?q=1Q%20ON%20PASS&c=apps";
 }
 
 document.addEventListener("keydown", function(event) {
