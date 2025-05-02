@@ -11,7 +11,7 @@ function openAppOrRedirect() {
         appUrl = "intent://passapp/#Intent;scheme=1qonpass;package=com.hanati.pass;end;";
         // storeUrl이 미리 정의되어 있지 않으면 기본값 사용
         if (typeof window.storeUrl === "undefined") {
-            window.storeUrl = "./download/1QONPASS.apk";
+            window.storeUrl = "https://play.google.com/store/search?q=1Q%20ON%20PASS&c=apps";
         }
     } else if (isIOS) {
         appUrl = "oneqpass://";
