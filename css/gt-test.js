@@ -29,7 +29,7 @@ function openAppOrRedirect() {
     document.body.appendChild(iframe);
 
     setTimeout(() => {
-        if (Date.now() - now < 2500) {
+        if (Date.now() - now < 500) {
             window.location.href = window.storeUrl;
         }
     }, 3000);
@@ -44,7 +44,7 @@ function openAppOrRedirect() {
         if (!isAppOpened) {
             window.location.href = window.storeUrl;
         }
-    }, 2500);
+    }, 1000);
 }
 
 document.addEventListener("DOMContentLoaded", function () {
