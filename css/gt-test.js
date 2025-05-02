@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function iosDownload(){
-    location.href = "intent://passapp/#Intent;scheme=1qonpass;package=com.hanati.pass;end;";
+    location.href = "https://play.google.com/store/apps/details?id=com.hanati.pass";
 }
 
 function aosDownload(){
