@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function iosDownload(){
-    location.href = "https://play.google.com/store/apps/details?id=com.hanati.pass";
+    location.href = "https://apps.apple.com/us/app/1q-on-pass/id6474642959";
 }
 
 function aosDownload(){
