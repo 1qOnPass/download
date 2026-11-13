@@ -97,7 +97,7 @@ strong {font-weight:bold;}
 
 #wrap {display:flex; align-items:center; justify-content:center; position:relative; min-height:100%; padding-bottom:84px;}
 .box_wrap {max-width:1100px; margin:0 20px; padding:30px 0; text-align:center;}
-.box_wrap .logo img {width:120px;}
+.box_wrap .logo img {width:120px;border-radius:22%;}
 .box_wrap h1 {padding:6px 0 30px; color:#000000; font-weight:bold; font-size:40px; line-height:1.3; font-family:'Hana';}
 .box_wrap .btn {padding-bottom:30px; font-size:0;}
 .box_wrap .btn button {display:inline-block; width:260px; height:80px; background-size:100% auto !important; text-indent:-9999px;}
